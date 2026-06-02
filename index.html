@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving | Bentekkie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            color: #60a5fa;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .plane-container {
+            position: relative;
+            height: 200px;
+            margin: 2rem 0;
+            perspective: 1000px;
+        }
+
+        .plane {
+            position: absolute;
+            left: -100px;
+            top: 50%;
+            transform: translateY(-50%) translateZ(0);
+            font-size: 4rem;
+            animation: flyAcross 6s infinite ease-in-out;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+        }
+
+        @keyframes flyAcross {
+            0% {
+                left: -100px;
+                transform: translateY(-50%) scaleX(1) translateZ(0);
+            }
+            50% {
+                transform: translateY(-80px) scaleX(1) translateZ(0);
+            }
+            100% {
+                left: calc(100vw + 100px);
+                transform: translateY(-50%) scaleX(1) translateZ(0);
+            }
+        }
+
+        .trail {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 2px;
+            transform: translateY(-50%);
+            background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.3), transparent);
+            opacity: 0;
+            animation: trailAnimation 6s infinite ease-in-out;
+        }
+
+        @keyframes trailAnimation {
+            0% {
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .details {
+            margin-top: 3rem;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .detail-item {
+            display: inline-block;
+            margin: 0 1.5rem;
+            font-size: 0.95rem;
+            color: #cbd5e1;
+        }
+
+        .detail-item strong {
+            color: #60a5fa;
+        }
+
+        .contact-links {
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .contact-links a {
+            display: inline-block;
+            margin: 0 1rem;
+            padding: 0.75rem 1.5rem;
+            color: #60a5fa;
+            text-decoration: none;
+            border: 1px solid #60a5fa;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .contact-links a:hover {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating background elements */
+        .float-bg {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            background: #3b82f6;
+            border-radius: 50%;
+            top: -50px;
+            right: -50px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            background: #60a5fa;
+            border-radius: 50%;
+            bottom: -50px;
+            left: -50px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(30px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .detail-item {
+                display: block;
+                margin: 0.5rem 0;
+            }
+
+            .contact-links a {
+                display: inline-block;
+                margin: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="float-bg circle-1"></div>
+    <div class="float-bg circle-2"></div>
+
+    <div class="container">
+        <h1>Moving</h1>
+        <p class="subtitle">Portfolio currently in transit</p>
+        
+        <div class="status">
+            ✈️ En route to something awesome
+        </div>
+
+        <div class="plane-container">
+            <div class="trail"></div>
+            <div class="plane">✈️</div>
+        </div>
+
+        <div class="details">
+            <div class="detail-item">
+                <strong>Status:</strong> Relocating
+            </div>
+            <div class="detail-item">
+                <strong>ETA:</strong> Soon
+            </div>
+        </div>
+
+        <div class="contact-links">
+            <a href="https://github.com/bentekkie" target="_blank">GitHub</a>
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="mailto:bentekkie@example.com">Email</a>
+        </div>
+    </div>
+</body>
+</html>
